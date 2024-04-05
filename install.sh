@@ -215,8 +215,6 @@ sudo systemctl enable kubelet
 #  pod and service CIDRs. For more details refer to kubeadm configuration docs 
 # and kubelet config docs.
 
-cd ~
-
 cat <<CONFIG > kubeadmin-config.yaml
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
