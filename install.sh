@@ -262,7 +262,7 @@ nodeRegistration:
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
-kubernetesVersion: "1.29.0"
+kubernetesVersion: "$KUBERNETES_VERSION"
 networking:
   podSubnet: "10.32.0.0/16"
   serviceSubnet: "172.16.16.0/22"
