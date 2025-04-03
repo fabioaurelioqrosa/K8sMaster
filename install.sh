@@ -37,6 +37,37 @@ sudo sysctl --system
 ## Installing CRI-O ##
 ######################
 
+# Define the Kubernetes version and used CRI-O stream
+
+KUBERNETES_VERSION=v1.32
+CRIO_VERSION=v1.32
+
+
+# Add the Kubernetes repository
+
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/repodata/repomd.xml.key
+EOF
+
+
+# Add the CRI-O repository
+
+cat <<EOF | tee /etc/yum.repos.d/cri-o.repo
+[cri-o]
+name=CRI-O
+baseurl=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/rpm/repodata/repomd.xml.key
+EOF
+
+
+
 # Container Runtime Interface OCI is an opensource container engine dedicated to 
 # Kubernetes. The engine implements the Kubernetes grpc protocol (CRI) and is 
 # compatible with any low-level OCI container runtime. All supported runtimes must be 
@@ -44,7 +75,7 @@ sudo sysctl --system
 # version-locked with Kubernetes. We will deploy cri-o:1.27 with kubernetes:1.27 on 
 # fedora-39.
 
-sudo dnf install -y cri-o cri-tools 
+sudo dnf install -y  container-selinux cri-o cri-tools 
 
 # To check what the package installed:
 
