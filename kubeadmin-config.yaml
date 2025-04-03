@@ -1,0 +1,24 @@
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  name: k8s-master-01
+  criSocket: "unix:///var/run/crio/crio.sock"
+  imagePullPolicy: "IfNotPresent"
+  kubeletExtraArgs: 
+    cgroup-driver: "systemd"
+    resolv-conf: "/run/systemd/resolve/resolv.conf"
+    max-pods: "4096"
+    max-open-files: "20000000"
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: "v1.32"
+networking:
+  podSubnet: "10.32.0.0/16"
+  serviceSubnet: "172.16.16.0/22"
+controllerManager:
+  extraArgs:
+    node-cidr-mask-size: "20"
+    allocate-node-cidrs: "true"
+---

@@ -45,7 +45,7 @@ CRIO_VERSION=v1.32
 
 # Add the Kubernetes repository
 
-sudo cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
+sudo cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/rpm/
@@ -57,7 +57,7 @@ EOF
 
 # Add the CRI-O repository
 
-sudo cat <<EOF | tee /etc/yum.repos.d/cri-o.repo
+sudo cat <<EOF | sudo tee /etc/yum.repos.d/cri-o.repo
 [cri-o]
 name=CRI-O
 baseurl=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/rpm/
